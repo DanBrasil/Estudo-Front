@@ -1,16 +1,31 @@
-import { render, type RenderOptions } from '@testing-library/react'
-import type { ReactElement } from 'react'
-import { AppProviders } from '@/app/AppProviders'
+import { render, type RenderOptions } from "@testing-library/react";
+import type { ReactElement, ReactNode } from "react";
+import { MemoryRouter } from "react-router-dom";
+import { AppProviders } from "@/app/AppProviders";
 
-/**
- * render() com os providers globais ja aplicados.
- * Use este no lugar do render da testing-library em todos os testes.
- */
-export function renderWithProviders(
-  ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>,
-) {
-  return render(ui, { wrapper: AppProviders, ...options })
+interface RenderWithProvidersOptions extends Omit<RenderOptions, "wrapper"> {
+  route?: string;
 }
 
-export { screen, within, waitFor, fireEvent, act } from '@testing-library/react'
+export const renderWithProviders = (
+  ui: ReactElement,
+  { route = "/", ...options }: RenderWithProvidersOptions = {},
+) => {
+  const Wrapper = ({ children }: { children: ReactNode }) => (
+    <AppProviders>
+      <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
+    </AppProviders>
+  );
+
+  return render(ui, { wrapper: Wrapper, ...options });
+};
+
+export {
+  act,
+  fireEvent,
+  screen,
+  waitFor,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
+export { default as userEvent } from "@testing-library/user-event";

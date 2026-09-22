@@ -1,0 +1,10 @@
+.codeBlock {
+  overflow-x: auto;
+  padding: var(--space-3);
+  border: 1px solid var(--gray-a6);
+  border-radius: var(--radius-3);
+  background: var(--color-panel-solid);
+  font-family: var(--code-font-family);
+  font-size: var(--font-size-2);
+  line-height: 1.6;
+}

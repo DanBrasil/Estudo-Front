@@ -1,0 +1,12 @@
+.header {
+  border-bottom: 1px solid var(--gray-a6);
+  background: var(--color-panel-solid);
+}
+
+.brandLink:hover {
+  color: var(--accent-9);
+}
+
+.main {
+  padding-block: var(--space-6);
+}

@@ -1,21 +1,21 @@
-import type { ReactNode } from 'react'
-import { ThemeProvider } from 'styled-components'
-import { GlobalStyle } from '@/styles/GlobalStyle'
-import { theme } from '@/styles/theme'
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
+import type { ReactNode } from "react";
+import { ProgressProvider } from "@/features/progress/ProgressProvider";
 
 interface AppProvidersProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-/**
- * Concentra todos os providers globais (tema, futuros contexts de dominio).
- * Um unico lugar para envolver tanto o app real quanto os testes.
- */
-export function AppProviders({ children }: AppProvidersProps) {
+export const AppProviders = ({ children }: AppProvidersProps) => {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {children}
-    </ThemeProvider>
-  )
-}
+    <Theme
+      appearance="dark"
+      accentColor="blue"
+      grayColor="slate"
+      radius="medium"
+    >
+      <ProgressProvider>{children}</ProgressProvider>
+    </Theme>
+  );
+};

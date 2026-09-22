@@ -1,6 +1,11 @@
-/**
- * Caminhos centralizados: nenhum componente escreve "/categoria/..." na mao.
- */
-export const ROUTES = {
-  home: '/',
-} as const
+export const routes = {
+  home: "/",
+  category: "/categoria/:categorySlug",
+  topic: "/categoria/:categorySlug/:topicSlug",
+} as const;
+
+export const buildCategoryPath = (categorySlug: string) =>
+  `/categoria/${categorySlug}`;
+
+export const buildTopicPath = (categorySlug: string, topicSlug: string) =>
+  `/categoria/${categorySlug}/${topicSlug}`;
